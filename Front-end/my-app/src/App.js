@@ -4,46 +4,17 @@ import Home from "./Components/Home";
 import AddProperty from "./Components/AddProperty";
 import AddTask from "./Components/AddTask";
 import TaskList from "./Components/TaskList";
+import Navbar from "./Components/NavBar";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen">
-      {/* Sticky Navbar */}
-      <nav className="bg-gray-600 text-white p-4 shadow-lg sticky top-0 z-50">
-        <ul className="flex justify-center space-x-8">
-          <li>
-            <Link to="/" className="hover:text-gray-200 text-lg font-semibold">
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/add-property"
-              className="hover:text-gray-200 text-lg font-semibold"
-            >
-              Add Property
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/add-task"
-              className="hover:text-gray-200 text-lg font-semibold"
-            >
-              Add Task
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/task-list"
-              className="hover:text-gray-200 text-lg font-semibold"
-            >
-              Task List
-            </Link>
-          </li>
-        </ul>
-      </nav>
+    <div className="text-green-900">
+      <ToastContainer />
 
-      {/* Main Content */}
+      <Navbar />
+
       <div className="p-6">
         <Routes>
           <Route path="/" element={<Home />} />

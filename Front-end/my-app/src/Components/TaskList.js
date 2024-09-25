@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { format } from "date-fns"; // Importing date-fns for formatting
+import { toast } from "react-toastify";
+import { format } from "date-fns";
+import Logo from "../Images/logo.png";
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
@@ -17,9 +17,8 @@ const TaskList = () => {
 
     fetchTasks();
 
-    // Set the current date on initial render (without time)
     const today = new Date();
-    const formattedDate = format(today, "dd-MM-yyyy"); // Only the date is shown
+    const formattedDate = format(today, "dd-MM-yyyy");
     setCurrentDate(formattedDate);
   }, []);
 
@@ -47,93 +46,108 @@ const TaskList = () => {
     handleStatusChange(taskId, "In Progress");
   };
 
-  // Get the current date for overdue checks
   const todayDate = new Date();
 
-  // Filter tasks based on status
   const filteredTasks = tasks.filter((task) => {
     return filterStatus === "All" || task.status === filterStatus;
   });
 
   return (
-    <div className="max-w-md mx-auto mt-8">
-      <ToastContainer />
-      <h2 className="text-2xl font-bold mb-4">Task List</h2>
-
-      {/* Show current date */}
+    <div className="max-w-7xl mx-auto mt-8">
+      <div className="flex justify-between items-center">
+        <h2 className="text-2xl font-bold mb-4">Task List</h2>
+        <img src={Logo} alt="logo" className="w-28" />
+      </div>
       <p className="mb-4">
         <strong>Current Date:</strong> {currentDate}
       </p>
 
-      {/* Filter Options */}
-      <div className="mb-4">
-        <label className="mr-2">Filter by Status:</label>
-        <select
-          value={filterStatus}
-          onChange={(e) => setFilterStatus(e.target.value)}
-          className="border rounded p-1"
-        >
-          <option value="All">All</option>
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-      </div>
-
-      {filteredTasks.map((task) => {
-        // Check if the task is overdue
-        const isOverdue = new Date(task.dueDate) < todayDate;
-
-        // Format the due date without time using date-fns
-        const formattedDueDate = format(
-          new Date(task.dueDate),
-          "dd-MM-yyyy" // Only the date is shown
-        );
-
-        return (
-          <div
-            key={task._id}
-            className={`border p-4 mb-4 rounded-lg ${
-              isOverdue
-                ? "bg-red-400" // More pronounced red for overdue tasks
-                : task.status === "Pending"
-                ? "bg-red-200"
-                : task.status === "Completed"
-                ? "bg-green-200"
-                : "bg-yellow-200"
+      <div className="mb-4 flex space-x-4 font-bold">
+        {["All", "Pending", "In Progress", "Completed"].map((status) => (
+          <button
+            key={status}
+            onClick={() => setFilterStatus(status)}
+            className={`px-4 py-2  bg-transparent border-b-2  rounded-none ${
+              filterStatus === status
+                ? "border-b-green-900 text-grey-900"
+                : " text-gray-200"
             }`}
           >
-            <p>Description: {task.description}</p>
-            <p>Due Date: {formattedDueDate}</p>{" "}
-            {/* Display formatted date without time */}
-            <p>
-              Status:{" "}
-              <span
-                className={
-                  task.status === "Pending" ? "text-red-600" : "text-green-600"
-                }
-              >
-                {task.status}
-              </span>
-            </p>
-            <p>
-              Property: <span className="font-bold">{task.property.name}</span>
-            </p>
-            <button
-              onClick={() => markAsInProgress(task._id)}
-              className="bg-yellow-500 text-white py-1 px-2 rounded mr-2"
+            {status}
+          </button>
+        ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        {filteredTasks.map((task) => {
+          const isOverdue = new Date(task.dueDate) < todayDate;
+
+          const formattedDueDate = format(new Date(task.dueDate), "dd-MM-yyyy");
+
+          return (
+            <div
+              key={task._id}
+              className={`border border-green-900 p-4 rounded-lg shadow-md shadow-green-200`}
             >
-              Mark as In Progress
-            </button>
-            <button
-              onClick={() => markAsCompleted(task._id)}
-              className="bg-green-500 text-white py-1 px-2 rounded"
-            >
-              Mark as Completed
-            </button>
-          </div>
-        );
-      })}
+              <div className="flex  justify-end ">
+                <div
+                  className={`p-1 rounded-md   text-center text-[10px] text-white  ${
+                    isOverdue
+                      ? "bg-red-600"
+                      : task.status === "Pending"
+                      ? "bg-yellow-600"
+                      : task.status === "Completed"
+                      ? "bg-green-600"
+                      : "bg-yellow-200"
+                  }`}
+                >
+                  {task.status === "In Progress" ? (
+                    "Progress"
+                  ) : (
+                    <div>{task.status}</div>
+                  )}
+                </div>
+              </div>
+              <p>
+                <span className="font-bold">Description:</span>
+                {task.description}
+              </p>
+              <p>
+                <span className="font-bold">Due Date:</span> {formattedDueDate}
+              </p>{" "}
+              <p>
+                <span className="font-bold">Status:</span>
+                <span
+                  className={
+                    task.status === "Pending"
+                      ? "text-red-600"
+                      : "text-green-600"
+                  }
+                >
+                  {task.status}
+                </span>
+              </p>
+              <p>
+                <span className="font-bold">Property:</span>
+                <span className="font-bold">{task.property.name}</span>
+              </p>
+              <div className="mt-4">
+                <button
+                  onClick={() => markAsInProgress(task._id)}
+                  className="bg-white text-green-900 border border-green-900 py-1 px-2 rounded mr-2"
+                >
+                  Mark as In Progress
+                </button>
+                <button
+                  onClick={() => markAsCompleted(task._id)}
+                  className="bg-green-900 text-white py-1 px-2 rounded"
+                >
+                  Mark as Completed
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

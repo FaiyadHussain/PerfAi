@@ -11,7 +11,7 @@ HomePage:
 Add Property:
 ![Tool](https://github.com/FaiyadHussain/PerfAi/blob/master/Front-end/my-app/assest/02.png)
 
-Property Details:
+Add Task:
 ![Tool](https://github.com/FaiyadHussain/PerfAi/blob/master/Front-end/my-app/assest/03.png)
 
 Task List :

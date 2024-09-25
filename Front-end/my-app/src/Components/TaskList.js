@@ -53,34 +53,33 @@ const TaskList = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto mt-8">
-      <div className="flex justify-between items-center">
-        <h2 className="text-2xl font-bold mb-4">Task List</h2>
+    <div className="max-w-7xl mx-auto mt-8 px-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold">Task List</h2>
         <img src={Logo} alt="logo" className="w-28" />
       </div>
       <p className="mb-4">
         <strong>Current Date:</strong> {currentDate}
       </p>
 
-      <div className="mb-4 flex space-x-4 font-bold">
+      <div className="mb-4 flex flex-wrap space-x-4 font-bold">
         {["All", "Pending", "In Progress", "Completed"].map((status) => (
           <button
             key={status}
             onClick={() => setFilterStatus(status)}
-            className={`px-4 py-2  bg-transparent border-b-2  rounded-none ${
+            className={`px-4 py-2 bg-transparent border-b-2 rounded-none ${
               filterStatus === status
                 ? "border-b-green-900 text-grey-900"
-                : " text-gray-200"
+                : "text-gray-200"
             }`}
           >
             {status}
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredTasks.map((task) => {
           const isOverdue = new Date(task.dueDate) < todayDate;
-
           const formattedDueDate = format(new Date(task.dueDate), "dd-MM-yyyy");
 
           return (
@@ -88,9 +87,9 @@ const TaskList = () => {
               key={task._id}
               className={`border border-green-900 p-4 rounded-lg shadow-md shadow-green-200`}
             >
-              <div className="flex  justify-end ">
+              <div className="flex justify-end">
                 <div
-                  className={`p-1 rounded-md   text-center text-[10px] text-white  ${
+                  className={`p-1 rounded-md text-center text-[10px] text-white ${
                     isOverdue
                       ? "bg-red-600"
                       : task.status === "Pending"
@@ -100,21 +99,17 @@ const TaskList = () => {
                       : "bg-yellow-200"
                   }`}
                 >
-                  {task.status === "In Progress" ? (
-                    "Progress"
-                  ) : (
-                    <div>{task.status}</div>
-                  )}
+                  {task.status === "In Progress" ? "Progress" : task.status}
                 </div>
               </div>
-              <p>
-                <span className="font-bold">Description:</span>
+              <p className="text-sm">
+                <span className="font-bold">Description:</span>{" "}
                 {task.description}
               </p>
-              <p>
+              <p className="text-sm">
                 <span className="font-bold">Due Date:</span> {formattedDueDate}
-              </p>{" "}
-              <p>
+              </p>
+              <p className="text-sm">
                 <span className="font-bold">Status:</span>
                 <span
                   className={
@@ -126,14 +121,14 @@ const TaskList = () => {
                   {task.status}
                 </span>
               </p>
-              <p>
+              <p className="text-sm">
                 <span className="font-bold">Property:</span>
                 <span className="font-bold">{task.property.name}</span>
               </p>
-              <div className="mt-4">
+              <div className="mt-4 flex flex-col md:flex-row">
                 <button
                   onClick={() => markAsInProgress(task._id)}
-                  className="bg-white text-green-900 border border-green-900 py-1 px-2 rounded mr-2"
+                  className="bg-white text-green-900 border border-green-900 py-1 px-2 rounded mr-2 mb-2 md:mb-0"
                 >
                   Mark as In Progress
                 </button>

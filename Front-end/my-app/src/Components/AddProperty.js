@@ -36,35 +36,36 @@ const AddProperty = () => {
   };
 
   return (
-    <div className=" mt-8 flex items-center justify-center gap-36 p-20">
-      <img src={Logo} alt="logo" />
-      <div>
-        <h2 className="text-2xl font-bold mb-4 ">Add Property</h2>
+    <div className="mt-8  flex flex-col md:flex-row items-center justify-center gap-36 p-6 md:p-20">
+      <img src={Logo} alt="logo" className="w-32 md:w-48 mb-6 md:mb-0" />
+
+      <div className="w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4 text-center">Add Property</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Property Name"
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <input
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
             placeholder="Location"
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <input
             type="text"
             value={type}
             onChange={(e) => setType(e.target.value)}
             placeholder="Type (e.g., Mosque, School)"
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <button
             type="submit"
-            className="bg-green-900 text-white py-2 px-4 rounded"
+            className="bg-green-900 text-white py-2 px-4 rounded w-full"
           >
             Add Property
           </button>

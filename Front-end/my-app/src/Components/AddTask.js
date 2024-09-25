@@ -25,7 +25,7 @@ const AddTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:3000/api/task", {
+      await axios.post("http://localhost:3000/api/task", {
         description,
         dueDate,
         taskType,
@@ -53,38 +53,38 @@ const AddTask = () => {
   };
 
   return (
-    <div className=" mt-8 flex items-center justify-center gap-36 p-24">
-      <div>
-        <img src={Logo} alt="logo" />
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-10 p-4 md:p-10">
+      <div className="mb-6 lg:mb-0">
+        <img src={Logo} alt="logo" className="w-40 h-40 lg:w-52 lg:h-52" />
       </div>
 
-      <div>
-        <h2 className="text-2xl font-bold mb-4">Add Task</h2>
+      <div className="max-w-lg w-full">
+        <h2 className="text-2xl font-bold mb-6 text-center ">Add Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Task Description"
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <input
             type="date"
             value={dueDate}
             onChange={(e) => setDueDate(e.target.value)}
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <input
             type="text"
             value={taskType}
             onChange={(e) => setTaskType(e.target.value)}
             placeholder="Task Type (e.g., Collect Rent, Maintenance)"
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           />
           <select
             value={propertyId}
             onChange={(e) => setPropertyId(e.target.value)}
-            className="border p-2 w-full"
+            className="border p-2 w-full rounded"
           >
             <option value="">Select Property</option>
             {properties.map((property) => (
@@ -95,7 +95,7 @@ const AddTask = () => {
           </select>
           <button
             type="submit"
-            className="bg-green-900 text-white py-2 px-4 rounded"
+            className="bg-green-900 text-white py-2 px-4 rounded w-full"
           >
             Add Task
           </button>

@@ -43,10 +43,8 @@ Before you begin, ensure that you have the following installed:
    code .
 3. Install Dependencies:-
    npm install
-4. Configure Environment Variable in ".env" file:-
-   DB_URL=your_MongoDB_url
-5. Run the Application:-
+4. Run the Application:-
    a) Run Backend Server: Terminal-->cd backend-->npm start
    b) Run FrontEnd server: Terminal-->cd my-app -->npm start
-6. Access the Application:-
+5. Access the Application:-
    Typically, it will run on: "http://localhost:3000"

@@ -125,6 +125,10 @@ const TaskList = () => {
                 <span className="font-bold">Property:</span>
                 <span className="font-bold">{task.property.name}</span>
               </p>
+              <p className="text-sm">
+                <span className="font-bold">Location:</span>{" "}
+                {task.property.location}
+              </p>
               <div className="mt-4 flex flex-col md:flex-row">
                 <button
                   onClick={() => markAsInProgress(task._id)}

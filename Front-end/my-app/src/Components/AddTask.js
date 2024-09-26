@@ -8,7 +8,7 @@ import Logo from "../Images/logo.png";
 const AddTask = () => {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [taskType, setTaskType] = useState("");
+  const [taskType, setTaskType] = useState("Collect Rent"); // Default value set to 'Collect Rent'
   const [propertyId, setPropertyId] = useState("");
   const [properties, setProperties] = useState([]);
 
@@ -41,7 +41,7 @@ const AddTask = () => {
       }, 3000);
       setDescription("");
       setDueDate("");
-      setTaskType("");
+      setTaskType("Collect Rent"); // Reset taskType to default value
       setPropertyId("");
     } catch (err) {
       console.error(err);
@@ -59,7 +59,7 @@ const AddTask = () => {
       </div>
 
       <div className="max-w-lg w-full">
-        <h2 className="text-2xl font-bold mb-6 text-center ">Add Task</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Add Task</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
@@ -74,13 +74,22 @@ const AddTask = () => {
             onChange={(e) => setDueDate(e.target.value)}
             className="border p-2 w-full rounded"
           />
-          <input
-            type="text"
+
+          {/* Dropdown for Task Type */}
+          <select
             value={taskType}
             onChange={(e) => setTaskType(e.target.value)}
-            placeholder="Task Type (e.g., Collect Rent, Maintenance)"
             className="border p-2 w-full rounded"
-          />
+          >
+            <option value="Collect Rent">Collect Rent</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Follow-up on Legal Issue">
+              Follow-up on Legal Issue
+            </option>
+            <option value="Property Inspection">Property Inspection</option>
+            <option value="Tenant Communication">Tenant Communication</option>
+          </select>
+
           <select
             value={propertyId}
             onChange={(e) => setPropertyId(e.target.value)}

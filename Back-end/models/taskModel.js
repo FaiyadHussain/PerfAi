@@ -10,6 +10,7 @@ const taskSchema = new mongoose.Schema({
   },
   type: {
     type: String,
+    enum: ["Collect rent", "Maintenance", "Other"],
   },
   property: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
 });

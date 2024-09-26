@@ -47,4 +47,4 @@ Before you begin, ensure that you have the following installed:
    a) Run Backend Server: Terminal-->cd backend-->npm start
    b) Run FrontEnd server: Terminal-->cd my-app -->npm start
 5. Access the Application:-
-   Typically, it will run on: "http://localhost:3000"
+   Typically, it will run on: "http://localhost:3001"

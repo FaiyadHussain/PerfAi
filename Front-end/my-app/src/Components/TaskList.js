@@ -11,8 +11,13 @@ const TaskList = () => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      const res = await axios.get("http://localhost:3000/api/task");
-      setTasks(res.data);
+      try {
+        const res = await axios.get("http://localhost:3000/api/task");
+        setTasks(res.data);
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+        toast.error("Error fetching tasks");
+      }
     };
 
     fetchTasks();
@@ -26,12 +31,16 @@ const TaskList = () => {
     try {
       const res = await axios.patch(
         `http://localhost:3000/api/task/${taskId}/status`,
-        {
-          status: newStatus,
-        }
+        { status: newStatus }
       );
       toast.success("Status updated successfully!");
-      setTasks(tasks.map((task) => (task._id === taskId ? res.data : task)));
+
+      // Update tasks state to reflect the change
+      setTasks((prevTasks) =>
+        prevTasks.map((task) =>
+          task._id === taskId ? { ...task, status: newStatus } : task
+        )
+      );
     } catch (err) {
       console.error("Error:", err.response ? err.response.data : err.message);
       toast.error("Error updating status");
@@ -122,12 +131,14 @@ const TaskList = () => {
                 </span>
               </p>
               <p className="text-sm">
-                <span className="font-bold">Property:</span>
-                <span className="font-bold">{task.property.name}</span>
+                <span className="font-bold">Property:</span>{" "}
+                <span className="font-bold">
+                  {task.property ? task.property.name : "N/A"}
+                </span>
               </p>
               <p className="text-sm">
                 <span className="font-bold">Location:</span>{" "}
-                {task.property.location}
+                {task.property ? task.property.location : "N/A"}
               </p>
               <div className="mt-4 flex flex-col md:flex-row">
                 <button

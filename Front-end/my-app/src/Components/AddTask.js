@@ -8,7 +8,7 @@ import Logo from "../Images/logo.png";
 const AddTask = () => {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [taskType, setTaskType] = useState("Collect Rent"); // Default value set to 'Collect Rent'
+  const [taskType, setTaskType] = useState("Collect Rent");
   const [propertyId, setPropertyId] = useState("");
   const [properties, setProperties] = useState([]);
 
@@ -41,7 +41,7 @@ const AddTask = () => {
       }, 3000);
       setDescription("");
       setDueDate("");
-      setTaskType("Collect Rent"); // Reset taskType to default value
+      setTaskType("Collect Rent");
       setPropertyId("");
     } catch (err) {
       console.error(err);
@@ -75,7 +75,6 @@ const AddTask = () => {
             className="border p-2 w-full rounded"
           />
 
-          {/* Dropdown for Task Type */}
           <select
             value={taskType}
             onChange={(e) => setTaskType(e.target.value)}

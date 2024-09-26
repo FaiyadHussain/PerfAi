@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const AddProperty = () => {
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
-  const [type, setType] = useState("Mosque"); // Default value set to 'Mosque'
+  const [type, setType] = useState("Mosque");
 
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ const AddProperty = () => {
       });
       setName("");
       setLocation("");
-      setType("Mosque"); // Reset the type to default value
+      setType("Mosque");
     } catch (err) {
       console.error(err);
       toast.error("Error adding property", {
@@ -57,7 +57,6 @@ const AddProperty = () => {
             className="border p-2 w-full rounded"
           />
 
-          {/* Dropdown for Property Type */}
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
